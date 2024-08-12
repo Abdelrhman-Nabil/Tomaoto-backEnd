@@ -9,14 +9,14 @@ router.get("/allProduct", ProductController.getAllProduct);
 router.post("/",fileUpload.single("image"),
   [
     check("title").not().isEmpty(),
-    check("description").isLength({ min: 5 }),
+    check("details").isLength({ min: 5 }),
     check("price").not().isEmpty(),
   ],
   ProductController.addProduct
 );
 router.patch(
-  "/:pid",
-  [check("title").not().isEmpty(), check("description").isLength({ min: 5 })],
+  "/:pid",fileUpload.single("image"),
+  [check("title").not().isEmpty(), check("details").isLength({ min: 5 })],
   ProductController.updateProduct
 );
 router.delete('/:pid',ProductController.deleteProduct)

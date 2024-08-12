@@ -3,12 +3,13 @@ const CheckAuth=require("../middleware/checkAuth")
 const router=express.Router();
 const orderController=require('../controller/orderController')
 router.get('/user/:uid',orderController.getOrderByUserId)
-router.get('/getorders',orderController.getAllOrder);
+router.get('/getOrders',orderController.getAllOrder);
 
 router.delete('/:pid',orderController.deleteOrder);
 
+router.patch("/:pid",orderController.updateOrder);
 
-// router.use(CheckAuth)
+router.use(CheckAuth)
 
 router.post('/',orderController.addOrder);
 

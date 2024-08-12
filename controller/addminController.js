@@ -14,7 +14,7 @@ const getAllAdmin=async(req,res,next)=>{
 const addAdmin=async(req,res,next)=>{
     const{email,time}=req.body
     const createEmail=new AddminEmail({email,time});
- 
+    
     try{
      await createEmail.save()
    }
@@ -24,21 +24,22 @@ const addAdmin=async(req,res,next)=>{
    }
    res.status(201).json({ email: createEmail });
 };
-const deleteAddmin=async(res,req,next)=>{
-    const emailId = req.params.pid;
-    let email;
-    try{
-        email=await AddminEmail.findByIdAndDelete(emailId);
+const deleteAddmin=async(req,res,next)=>{
+  const emailId = req.params.pid;
+  let email;
+  try{
+      email=await AddminEmail.findByIdAndDelete(emailId);
 
-    } catch (err) {
-      const error = new HttpError(
-        'Something went wrong, could not delete email.',
-        500
-      );
-      return next(error);
-    }
-    res.status(200).json({ message: 'Deleted email.' });
-};
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not delete email.',
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ message: 'Deleted email.' });
+}
 exports.getAllAdmin=getAllAdmin;
 exports.addAdmin=addAdmin;
 exports.deleteAddmin=deleteAddmin;

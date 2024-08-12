@@ -1,0 +1,10 @@
+{
+    "env":{
+        "DB_USER":"boka",               
+        "DB_PASSWORD":"boka0505",
+        "DB_NAME":"Tomato",
+        "SECRET_KEY":"sk_test_51PlDXBG0xf9jo2gbVHSQarJbnQF3rGo7wpgD93ac1b2DIoalxyJIml26vC3DcrkPkLpbvpd5Hq4tuyWDCAAWQYuw008QhvfW9k"
+
+    }
+
+}

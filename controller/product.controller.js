@@ -56,11 +56,11 @@ const addProduct=async(req,res,next)=>{
 };
 const updateProduct=async(req,res,next)=>{
   const productId = req.params.pid;
-  const {title,details,category,price}=req.body
-
+  const {title,details,category,price,image}=req.body;
   let product;
   try{
     product=await Product.findById(productId)
+  
   }
   catch(err){
     const error = new HttpError(
@@ -73,6 +73,7 @@ const updateProduct=async(req,res,next)=>{
    product.details=details;
    product.category=category;
    product.price=price;
+   product.image=req.file?req.file.path:image;
 
    try{
      await product.save();

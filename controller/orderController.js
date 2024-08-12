@@ -55,10 +55,9 @@ const addOrder=async(req,res,next)=>{
         new HttpError("Invalid inputs passed ,please check your data", 422)
       );
     }
-    const {recipient,email,address,total,date,product,creator}=req.body;
-
-    const createOrder=new Orders({recipient,email,address,total,action,product,creator});
-   
+    const {fullName,email,address,total,products,creator,phoneNumber}=req.body;
+    const createOrder=new Orders({fullName,email,address,total,action:"Food Processing",products,creator,phoneNumber});
+   console.log(createOrder)
     let user;
     try{
         user=await User.findById(creator)
@@ -89,6 +88,33 @@ const addOrder=async(req,res,next)=>{
 
 
 }
+
+const updateOrder=async(req,res,next)=>{
+    const orderId=req.params.pid
+    const {action}=req.body;
+    let order;
+    try{
+      order=await Orders.findById(orderId)
+    }
+    catch(err){
+      const error = new HttpError(
+           "Something went wrong ,please try again later",
+           500
+         );
+         return next(error);
+     }
+     order.action=action;
+     try{
+      await order.save();
+    }catch (err) {
+     const error = new HttpError(
+       "Somthing went wrong ,couldn't edit order",
+       500
+     );
+     return next(error)
+   }
+   res.status(200).json({ order: order.toObject({ getters: true }) });
+    }
 const deleteOrder=async(req,res,next)=>{
     const error = validationResult(req);
     if (!error.isEmpty()) {
@@ -97,7 +123,7 @@ const deleteOrder=async(req,res,next)=>{
       );
     }
 
-    const orderId=req.parms.pid;
+    const orderId=req.params.pid;
     let order;
     try{
         order=await Orders.findByIdAndDelete(orderId).populate("creator");
@@ -127,7 +153,8 @@ const deleteOrder=async(req,res,next)=>{
       res.status(200).json({ message: 'Deleted order.' });
 }
 
-exports.getOrderByUserId=getOrderByUserId
-exports.getAllOrder=getAllOrder
-exports.addOrder=addOrder
-exports.deleteOrder=deleteOrder
+exports.getOrderByUserId=getOrderByUserId;
+exports.getAllOrder=getAllOrder;
+exports.addOrder=addOrder;
+exports.updateOrder=updateOrder;
+exports.deleteOrder=deleteOrder;
