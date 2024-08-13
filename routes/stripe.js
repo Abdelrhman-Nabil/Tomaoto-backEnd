@@ -65,8 +65,8 @@ router.post('/create-checkout-session', async (req, res) => {
           ],
       line_items,
       mode: 'payment',
-      success_url: `http://localhost:3000/CkeckOutSuccess`,
-      cancel_url: `http://localhost:3000/PaymentForm`,
+      success_url: `https://tomato-11.web.app/CkeckOutSuccess`,
+      cancel_url: `https://tomato-11.web.app/PaymentForm`,
     });
   
     res.send({url:session.url});

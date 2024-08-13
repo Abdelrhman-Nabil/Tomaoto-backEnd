@@ -57,7 +57,6 @@ const addOrder=async(req,res,next)=>{
     }
     const {fullName,email,address,total,products,creator,phoneNumber}=req.body;
     const createOrder=new Orders({fullName,email,address,total,action:"Food Processing",products,creator,phoneNumber});
-   console.log(createOrder)
     let user;
     try{
         user=await User.findById(creator)
