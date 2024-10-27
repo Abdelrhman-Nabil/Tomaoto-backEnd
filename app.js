@@ -43,7 +43,7 @@ app.use((error,req,res,next)=>{
     res.status(error.code || 500)
     res.json({message:error.message || 'An unkown error eccurred'})
 })
-const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@tomato.8dzosfw.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=tomato`;
+const url = `mongodb+srv://boka:boka0505@tomato.8dzosfw.mongodb.net/Tomato?retryWrites=true&w=majority&appName=tomato`;
 mongoose.connect(url)
 .then(()=>{
     app.listen(5000);

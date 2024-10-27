@@ -70,7 +70,7 @@ const signUp=async(req,res,next)=>{
 }
 const logIn=async(req,res,next)=>{
   const { email, password } = req.body;
-
+     console.log(email, password)
   let existingUser,existAddmin;
   try{
     existAddmin=await Addmin.findOne({email}) ||''
